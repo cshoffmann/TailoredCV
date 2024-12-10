@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import axios from "axios";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [resume, setResume] = useState(null);
+  const [jobDescription, setJobDescription] = useState("");
+  const [result, setResult] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("resume", resume);
+    formData.append("jobDescription", jobDescription);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/generate",
+        formData
+      );
+      setResult(response.data.result);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <h1>Resume Tailor</h1>
+      <form onSubmit={handleSubmit}>
+        <input type="file" onChange={(e) => setResume(e.target.files[0])} />
+        <textarea
+          placeholder="Enter job description"
+          value={jobDescription}
+          onChange={(e) => setJobDescription(e.target.value)}
+        ></textarea>
+        <button type="submit">Generate</button>
+      </form>
+      {result && (
+        <div>
+          <h2>Result:</h2>
+          <p>{result}</p>
+        </div>
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
