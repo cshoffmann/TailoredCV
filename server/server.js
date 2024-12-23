@@ -1,14 +1,16 @@
 import express from "express";
-import tailorResumeRoute from "./routes/tailor.resume.js";
+import dotenv from "dotenv";
+import tailorRouter from "./routes/tailor.js"; // Import your router
+
+dotenv.config();
 
 const app = express();
+app.use(express.json()); // Middleware to parse JSON
 
-app.get("/", (req, res) => {
-  res.send("Server is ready");
-});
+// Use the router for the /api/tailor endpoint
+app.use("/api/tailor", tailorRouter);
 
-app.use("/api/tailor-resume", tailorResumeRoute);
-
-app.listen(5000, () => {
-  console.log("Server started on http://localhost:5000");
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });
