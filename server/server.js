@@ -1,17 +1,21 @@
 const express = require("express");
 const app = express();
-const port = 8080;
 const cors = require("cors");
-const corsOptions = {
-  origin: "http://localhost:5173",
-};
 
+const corsOptions = { origin: "http://localhost:5173" };
 app.use(cors(corsOptions));
+app.use(express.json());
 
-app.get("/api", (req, res) => {
-  res.send({ fruits: ["apple", "banana", "cherry"] });
-});
+// Import routes
+const tailorResumeRoute = require("./routes/tailorResume");
+const tailorCoverLetterRoute = require("./routes/tailorCoverLetter");
 
+// Use routes
+app.use("/api/tailor-resume", tailorResumeRoute);
+app.use("/api/tailor-cover-letter", tailorCoverLetterRoute);
+
+// Start the server
+const port = 8080;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
