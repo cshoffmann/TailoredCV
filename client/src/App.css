@@ -19,29 +19,6 @@ body,
   padding: 1rem;
 }
 
-/* Footer styles */
-.footer {
-  text-align: center;
-  background: #003366;
-  color: white;
-  padding: 1rem;
-  margin-top: auto; /* Ensures footer sticks to bottom */
-  width: 100%;
-}
-
-/* Socials Styling */
-.socials a {
-  margin: 0 0.5rem;
-  color: white;
-  text-decoration: none;
-}
-
-/* Button hover effect */
-.use-button:hover,
-.get-started:hover {
-  background: #e08e00;
-}
-
 /* Main Section Styling */
 .hero {
   background: #f4f4f4;
