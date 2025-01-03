@@ -1,10 +1,14 @@
 import "../styles/Header.css";
+import SuitIcon from "../assets/suit.svg?react";
 
 const Header = () => {
   return (
     <header className="navbar">
-      <div className="logo">TailorCV</div>
-      <button className="use-button">Use TailorCV</button>
+      <div className="navbar-left">
+        <SuitIcon className="suit-icon" />
+        <div className="logo">TailorCV</div>
+      </div>
+      <button className="use-button">Generate</button>
     </header>
   );
 };
