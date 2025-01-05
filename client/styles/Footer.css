@@ -1,0 +1,18 @@
+.footer {
+  text-align: center;
+  background: #161d6f;
+  color: white;
+  padding: 1rem;
+  margin-top: auto; /* Ensures footer sticks to bottom */
+  width: 100%;
+}
+
+.socials a {
+  margin: 0 0.5rem;
+  color: white;
+  text-decoration: none;
+}
+
+.socials a:hover {
+  color: #c7ffd8;
+}
