@@ -6,7 +6,7 @@ const openai = new OpenAI({
 });
 
 // Function to extract job details from a job description
-const extractJobDetails = async (jobPosting) => {
+const extractJobDetails = async (jobDescription) => {
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-4",
@@ -20,7 +20,7 @@ const extractJobDetails = async (jobPosting) => {
           role: "user",
           content: `Extract the job title, job description, and key skills from the following job posting:
 
-            ${jobPosting}
+            ${jobDescription}
 
             Return the result as a JSON object with the keys 'jobTitle', 'jobDescription', and 'jobSkills'. The jobSkills should be a comma-separated string of key skills mentioned in the job posting.`,
         },

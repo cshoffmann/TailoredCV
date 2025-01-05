@@ -7,6 +7,7 @@ const {
 
 router.post("/", async (req, res) => {
   const { jobDescription } = req.body;
+  console.log(`Job Description: ${jobDescription}`);
 
   if (!jobDescription) {
     return res
@@ -19,6 +20,7 @@ router.post("/", async (req, res) => {
   // Extract job details, in the form of JSON object, from the job description
   try {
     jobDetails = await extractJobDetails(jobDescription);
+    console.log("Extracted Job Details:", jobDetails);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -26,6 +28,7 @@ router.post("/", async (req, res) => {
   // Create a tailored cover letter based on the extracted job details
   try {
     const coverLetter = await createTailoredDocument(jobDetails);
+    console.log("Tailored Cover Letter:", coverLetter);
     res.json({ coverLetter });
   } catch (error) {
     res.status(500).json({ error: error.message });
