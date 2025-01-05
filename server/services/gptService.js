@@ -1,38 +1,77 @@
-const axios = require("axios");
+// Note: use gpt-3.5-turbo model if cost or speed is a concern, but gpt-4 is preferred for professionalism and accuracy
+const { OpenAI } = require("openai");
 
-// Function to call GPT API and generate either a tailored resume or cover letter
-const createTailoredDocument = async (jobDescription, type) => {
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+// Function to extract job details from a job description
+const extractJobDetails = async (jobPosting) => {
   try {
-    const apiKey = process.env.OPENAI_API_KEY; // Get API key from environment variable
-
-    // Create the appropriate prompt based on the document type (resume or cover letter)
-    const prompt =
-      type === "cover-letter"
-        ? `Write a professional cover letter for the following job description: ${jobDescription}`
-        : `Create a professional resume tailored to the following job description: ${jobDescription}`;
-
-    // Call GPT-3 API with the generated prompt
-    const response = await axios.post(
-      "https://api.openai.com/v1/completions",
-      {
-        model: "text-davinci-003",
-        prompt,
-        max_tokens: 300,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
+    const response = await openai.chat.completions.create({
+      model: "gpt-4",
+      messages: [
+        {
+          role: "system",
+          content:
+            "You are an AI that extracts structured data from job postings. Return the job title, description, and key skills as a JSON object.",
         },
-      }
-    );
+        {
+          role: "user",
+          content: `Extract the job title, job description, and key skills from the following job posting:
 
-    // Return the tailored document text (either resume or cover letter)
-    return response.data.choices[0].text.trim();
+            ${jobPosting}
+
+            Return the result as a JSON object with the keys 'jobTitle', 'jobDescription', and 'jobSkills'. The jobSkills should be a comma-separated string of key skills mentioned in the job posting.`,
+        },
+      ],
+      max_tokens: 400,
+    });
+
+    const extractedData = response.choices[0].message.content;
+    return JSON.parse(extractedData);
+  } catch (error) {
+    console.error("Error extracting job details:", error.message);
+    throw new Error("Failed to extract job details");
+  }
+};
+
+// Function to create a tailored document based on job details
+const createTailoredDocument = async ({
+  jobTitle,
+  jobDescription,
+  jobSkills,
+}) => {
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4",
+      messages: [
+        {
+          role: "system",
+          content:
+            "You are an expert career coach specializing in writing tailored, professional cover letters that match job descriptions. Use a formal tone and highlight the user's skills relevant to the job.",
+        },
+        {
+          role: "user",
+          content: `Write a professional cover letter for the following job description.
+
+          Job Title: ${jobTitle}
+                  
+          Job Description: ${jobDescription}
+
+          Job Skills: ${jobSkills}
+                  
+          Focus on showcasing relevant experience, skills, and qualifications that match the role. Tailor the cover letter to stand out to the employer.`,
+        },
+      ],
+      max_tokens: 500,
+    });
+
+    return response.choices[0].message.content.trim();
   } catch (error) {
     console.error("Error calling GPT API:", error.message);
     throw new Error("Failed to generate document");
   }
 };
 
-module.exports = { createTailoredDocument };
+module.exports = { extractJobDetails, createTailoredDocument };
