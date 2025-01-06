@@ -1,6 +1,6 @@
-# TailorCV
+# TailoredCV
 
-TailorCV is a web application that helps users tailor their resumes and generate cover letters using AI. The app allows users to upload their resumes and job descriptions, then leverages OpenAI's GPT API to customize the resume and generate a professional cover letter.
+TailoredCV is a web application that helps users tailor their resumes and generate cover letters using AI. The app allows users to upload their resumes and job descriptions, then leverages OpenAI's GPT API to customize the resume and generate a professional cover letter.
 
 ## Features
 - **Resume Upload**: Users can upload their resumes in various formats.
@@ -28,5 +28,5 @@ TailorCV is a web application that helps users tailor their resumes and generate
 ### Frontend:
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/TailorCV.git
-   cd TailorCV/client
+   git clone https://github.com/your-username/TailoredCV.git
+   cd TailoredCV/client
