@@ -8,18 +8,16 @@ body,
   font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-x: hidden;
 }
 
-/* Wrapper for content */
 .main-content {
-  flex: 1; /* Makes this section grow to fill remaining space */
+  flex: 1;
   display: flex;
   flex-direction: column;
   padding: 1rem;
 }
 
-/* Main Section Styling */
 .hero {
   background: #f4f4f4;
   padding: 3rem 1rem;
@@ -37,4 +35,47 @@ body,
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+/* Textarea styling */
+.job-description-textarea {
+  width: 60%;
+  height: 200px;
+  margin: 2rem auto;
+  display: block;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Focus effect */
+.job-description-textarea:focus {
+  outline: none;
+  border-color: #161d6f;
+  box-shadow: 0 0 8px rgba(22, 29, 111, 0.4);
+}
+
+/* Generated cover letter styling */
+.cover-letter-display {
+  width: 60%;
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.cover-letter-display pre {
+  white-space: pre-wrap;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  overflow-wrap: break-word;
 }
