@@ -27,9 +27,9 @@ router.post("/", async (req, res) => {
 
   // Create a tailored cover letter based on the extracted job details
   try {
-    const coverLetter = await createTailoredDocument(jobDetails);
-    console.log("Tailored Cover Letter:", coverLetter);
-    res.json({ coverLetter });
+    const tailoredCoverLetter = await createTailoredDocument(jobDetails);
+    console.log("Tailored Cover Letter:", tailoredCoverLetter);
+    res.json({ tailoredCoverLetter });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

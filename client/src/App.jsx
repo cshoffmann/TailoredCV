@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Steps from "../components/Steps";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -7,25 +7,31 @@ import axios from "axios";
 
 function App() {
   const serverUrl = "http://localhost:8080";
-  const [tailoredResume, setTailoredResume] = useState("");
   const [tailoredCoverLetter, setTailoredCoverLetter] = useState("");
-  const jobDescription = "Looking for a software developer job."; // Example data
+  const [jobDescription, setJobDescription] = useState(""); // State for job description
 
-  // Function to tailor the resume
-  const tailorResume = async (jobDescription) => {
-    try {
-      const response = await axios.post(`${serverUrl}/api/tailor-resume`, {
-        jobDescription,
-      });
-      console.log("Response from server:", response.data);
-      setTailoredResume(response.data.tailoredResume);
-    } catch (error) {
-      console.error("Error tailoring resume:", error.message);
-    }
+  // Handle textarea input
+  const handleInputChange = (e) => {
+    setJobDescription(e.target.value); // Update state asynchronously
   };
 
+  // Log updated job description whenever it changes
+  useEffect(() => {
+    console.log("Updated job description:", jobDescription);
+  }, [jobDescription]);
+
+  // Log generated (tailored) cover letter
+  useEffect(() => {
+    console.log("Tailored cover letter:", tailoredCoverLetter);
+  }, [tailoredCoverLetter]);
+
   // Function to tailor the cover letter
-  const tailorCoverLetter = async (jobDescription) => {
+  const tailorCoverLetter = async () => {
+    if (!jobDescription) {
+      console.error("Job description is empty");
+      return;
+    }
+
     try {
       const response = await axios.post(
         `${serverUrl}/api/tailor-cover-letter`,
@@ -43,7 +49,10 @@ function App() {
   return (
     <>
       <div className="app-container">
-        <Header />
+        <Header
+          onGenerate={tailorCoverLetter}
+          jobDescription={jobDescription}
+        />
         <div className="main-content">
           <Steps
             title="Step 1: Upload Job Description"
@@ -69,6 +78,19 @@ function App() {
             image="step4.png"
             layout="right"
           />
+          <textarea
+            placeholder="Paste job description here..."
+            value={jobDescription}
+            onChange={handleInputChange}
+            className="job-description-textarea"
+          />
+          {/* Display tailored cover letter */}
+          {tailoredCoverLetter && (
+            <div className="cover-letter-display">
+              <h2>Tailored Cover Letter</h2>
+              <pre>{tailoredCoverLetter}</pre>
+            </div>
+          )}
         </div>
         <Footer />
       </div>

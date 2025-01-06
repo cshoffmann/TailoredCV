@@ -37,7 +37,7 @@ body,
   cursor: pointer;
 }
 
-/* Textarea Styling */
+/* Textarea styling */
 .job-description-textarea {
   width: 60%;
   height: 200px;
@@ -56,4 +56,26 @@ body,
   outline: none;
   border-color: #161d6f;
   box-shadow: 0 0 8px rgba(22, 29, 111, 0.4);
+}
+
+/* Generated cover letter styling */
+.cover-letter-display {
+  width: 60%;
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.cover-letter-display pre {
+  white-space: pre-wrap;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  overflow-wrap: break-word;
 }
