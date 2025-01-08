@@ -1,7 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import "../styles/Header.css";
-import SuitIcon from "../assets/suit.svg?react";
+import SuitIcon from "../../assets/suit.svg?react";
 
 const Header = ({ onGenerate, jobDescription }) => {
+  const navigate = useNavigate();
+
+  const handleLogoClick = () => {
+    navigate("/");
+    window.location.reload();
+  };
+
   const handleButtonClick = () => {
     if (!jobDescription) {
       alert("Please paste a job description before generating.");
@@ -12,7 +20,11 @@ const Header = ({ onGenerate, jobDescription }) => {
 
   return (
     <header className="navbar">
-      <div className="navbar-left">
+      <div
+        className="navbar-left"
+        onClick={handleLogoClick}
+        style={{ cursor: "pointer" }}
+      >
         <SuitIcon className="suit-icon" />
         <div className="logo">TailorCV</div>
       </div>
