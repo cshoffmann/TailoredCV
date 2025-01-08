@@ -3,7 +3,12 @@ const app = express();
 const cors = require("cors");
 require("dotenv").config();
 
-const corsOptions = { origin: "http://localhost:5173" };
+const PORT = process.env.PORT || 3001;
+
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || "http://localhost:5173",
+  optionsSuccessStatus: 200,
+};
 app.use(cors(corsOptions));
 app.use(express.json());
 
@@ -15,8 +20,6 @@ const tailorCoverLetterRoute = require("./routes/tailorCoverLetter");
 app.use("/api/tailor-resume", tailorResumeRoute);
 app.use("/api/tailor-cover-letter", tailorCoverLetterRoute);
 
-// Start the server
-const port = 8080;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
