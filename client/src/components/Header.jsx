@@ -26,7 +26,7 @@ const Header = ({ onGenerate, jobDescription }) => {
         style={{ cursor: "pointer" }}
       >
         <SuitIcon className="suit-icon" />
-        <div className="logo">TailorCV</div>
+        <div className="logo">TailoredCV</div>
       </div>
       <button className="use-button" onClick={handleButtonClick}>
         Generate
