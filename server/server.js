@@ -5,22 +5,29 @@ require("dotenv").config();
 
 const PORT = process.env.PORT || 3001;
 
+// Allow the Vercel frontend and localhost during development
 const allowedOrigins = [process.env.FRONTEND_URL || "http://localhost:5173"];
 
-// Dynamic CORS configuration
+// CORS configuration (dynamic)
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true); // Allow the request
     } else {
-      callback(new Error("Not allowed by CORS")); // Block the request
+      callback(new Error("Not allowed by CORS"));
     }
   },
-  optionsSuccessStatus: 200,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: "Content-Type,Authorization",
+  optionsSuccessStatus: 204,
 };
 
+// Handle CORS globally
 app.use(cors(corsOptions));
 app.use(express.json());
+
+// Explicitly handle preflight (OPTIONS) requests
+app.options("*", cors(corsOptions));
 
 // Import routes
 const tailorResumeRoute = require("./routes/tailorResume");
