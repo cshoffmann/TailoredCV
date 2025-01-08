@@ -6,7 +6,7 @@ import "./App.css";
 import axios from "axios";
 
 function App() {
-  const serverUrl = "http://localhost:8080";
+  const serverUrl = import.meta.env.VITE_SERVER_URL;
   const [tailoredCoverLetter, setTailoredCoverLetter] = useState("");
   const [jobDescription, setJobDescription] = useState(""); // State for job description
 
