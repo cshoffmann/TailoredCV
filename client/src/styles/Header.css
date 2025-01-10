@@ -24,6 +24,7 @@
 }
 
 .use-button {
+  display: flex;
   background: #98ded9;
   color: black;
   padding: 0.5rem 1rem;
