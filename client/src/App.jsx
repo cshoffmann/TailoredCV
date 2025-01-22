@@ -19,7 +19,6 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/main" element={<MainPage />} />
-          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
 
         <Footer />

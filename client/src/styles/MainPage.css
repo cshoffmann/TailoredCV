@@ -1,6 +1,7 @@
 /* Textarea Styling */
 .job-description-textarea {
   width: 60%;
+  max-width: 1200px;
   height: 200px;
   margin: 2rem 0;
   display: block;

@@ -2,20 +2,11 @@ import { useNavigate } from "react-router-dom";
 import "../styles/Header.css";
 import SuitIcon from "../../assets/suit.svg?react";
 
-const Header = ({ onGenerate, jobDescription }) => {
+const Header = () => {
   const navigate = useNavigate();
 
   const handleLogoClick = () => {
     navigate("/");
-    window.location.reload();
-  };
-
-  const handleButtonClick = () => {
-    if (!jobDescription) {
-      alert("Please paste a job description before generating.");
-      return;
-    }
-    onGenerate();
   };
 
   return (
@@ -28,9 +19,6 @@ const Header = ({ onGenerate, jobDescription }) => {
         <SuitIcon className="suit-icon" />
         <div className="logo">TailoredCV</div>
       </div>
-      <button className="use-button" onClick={handleButtonClick}>
-        Generate
-      </button>
     </header>
   );
 };

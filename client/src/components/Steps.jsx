@@ -11,14 +11,14 @@ const Steps = ({ title, content, image, layout }) => {
             <p>{content}</p>
           </div>
           <div className="step-image">
-            <img src={image} alt={title} />
+            {/* <img src={image} alt={title} /> */}
           </div>
         </>
       )}
       {layout === "right" && (
         <>
           <div className="step-image">
-            <img src={image} alt={title} />
+            {/* <img src={image} alt={title} /> */}
           </div>
           <div className="step-content">
             <h3>{title}</h3>
