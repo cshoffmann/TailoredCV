@@ -1,8 +1,16 @@
+.generate-container {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  width: 80%;
+  min-height: 400px;
+}
+
 /* Textarea Styling */
 .job-description-textarea {
   width: 60%;
   max-width: 1200px;
-  height: 200px;
+  height: auto;
   margin: 2rem 0;
   display: block;
   padding: 1rem;
@@ -43,8 +51,10 @@ button:active {
 
 /* Generated Cover Letter Styling */
 .cover-letter-display {
+  position: relative;
   width: 60%;
   max-width: 1000px;
+  text-align: left;
   margin: 2rem auto;
   padding: 1.5rem;
   background-color: #f9f9f9;
@@ -56,9 +66,36 @@ button:active {
   white-space: pre-wrap;
 }
 
+.cover-letter-display h2 {
+  text-align: center;
+}
+
 .cover-letter-display pre {
   white-space: pre-wrap;
   font-family: Arial, sans-serif;
   margin: 0;
   overflow-wrap: break-word;
+}
+
+/* Copy Button */
+.copy-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #666;
+  font-size: 1.25rem;
+  transition: color 0.3s ease;
+}
+
+.copy-button:hover {
+  color: #000;
+}
+
+.copy-icon {
+  width: 24px;
+  height: 24px;
 }
