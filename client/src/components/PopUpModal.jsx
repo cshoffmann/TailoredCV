@@ -5,10 +5,20 @@ import {
   DialogTitle,
   Description,
 } from "@headlessui/react";
+import { FaRegCopy } from "react-icons/fa";
 import "../styles/PopupModal.css";
 
-const PopUpModal = () => {
+const PopUpModal = ({ tailoredCoverLetter }) => {
   let [isOpen, setIsOpen] = useState(false);
+
+  const handleCopy = () => {
+    if (tailoredCoverLetter) {
+      navigator.clipboard.writeText(tailoredCoverLetter);
+      console.log("Copied to clipboard:", tailoredCoverLetter);
+    } else {
+      console.error("No text to copy");
+    }
+  };
 
   return (
     <>
@@ -18,40 +28,37 @@ const PopUpModal = () => {
       <Dialog
         open={isOpen}
         onClose={() => setIsOpen(false)}
-        className="my-dialog-root" // Not strictly used for styling in this example
+        className="my-dialog-root"
       >
-        {/* This div is your custom backdrop */}
+        {/* Custom backdrop */}
         {isOpen && <div className="modal-backdrop" aria-hidden="true" />}
 
-        {/* Container to center the dialog */}
         <div className="modal-container">
           <DialogPanel className="modal-dialog">
+            {/* Copy button */}
+            <div className="copy-button-container">
+              <button className="copy-button" onClick={handleCopy} title="Copy">
+                <FaRegCopy />
+              </button>
+            </div>
+
+            {/* Modal content */}
             <DialogTitle as="h2" className="modal-title">
               Deactivate account
             </DialogTitle>
-
-            {/* The description that sets aria-describedby on the dialog */}
             <Description className="modal-description">
               This will permanently deactivate your account
             </Description>
-
             <p className="modal-text">
               Are you sure you want to deactivate your account? All of your data
               will be permanently removed. This action cannot be undone.
             </p>
-
             <div className="modal-button-group">
-              <button
-                className="modal-button modal-button-cancel"
-                onClick={() => setIsOpen(false)}
-              >
-                Cancel
-              </button>
               <button
                 className="modal-button modal-button-danger"
                 onClick={() => setIsOpen(false)}
               >
-                Deactivate
+                Close
               </button>
             </div>
           </DialogPanel>
