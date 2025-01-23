@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PopUpModal from "../components/PopupModal";
 import axios from "axios";
 import "../styles/MainPage.css";
 
@@ -69,7 +70,7 @@ function MainPage() {
           <p>{tailoredCoverLetter}</p>
         </div>
       </div>
-
+      <PopUpModal />
       <button onClick={tailorCoverLetter}>Generate Cover Letter</button>
     </div>
   );
